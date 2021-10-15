@@ -8,6 +8,8 @@ public class Drag : MonoBehaviour
 
     private bool isMoving = false;
 
+    public Material[] materials;
+
     private float gameObjectPositionX;
     private float gameObjectPositionY;
     private float gameObjectPositionZ;
@@ -56,7 +58,7 @@ public class Drag : MonoBehaviour
 
     void OnMouseDrag()
     {
-        isMoving = true;
+        //isMoving = true;
 
         float distance_to_screen = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         Vector3 pos_move = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance_to_screen));
@@ -65,14 +67,50 @@ public class Drag : MonoBehaviour
 
     private void OnMouseExit()
     {
-        isMoving = false;
+        //isMoving = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isMoving)
+        //GREEN
+        if (sphere.gameObject.tag == "blue" && other.gameObject.tag == "yellow" || sphere.gameObject.tag == "yellow" && other.gameObject.tag == "blue")
         {
-            Debug.Log("Delete: " + other.gameObject.tag);
+            foreach (var x in materials) {  
+                if (x.name == "green") {
+                    sphere.GetComponent<Renderer>().material = x;
+                    sphere.gameObject.tag = "green";
+                    Debug.Log("Convertir en verde.");
+                }
+            }
+            Destroy(other.gameObject);
+        }
+        //ORANGE
+        if (sphere.gameObject.tag == "red" && other.gameObject.tag == "yellow" || sphere.gameObject.tag == "yellow" && other.gameObject.tag == "red")
+        {
+            foreach (var x in materials)
+            {
+                if (x.name == "orange")
+                {
+                    sphere.GetComponent<Renderer>().material = x;
+                    sphere.gameObject.tag = "orange";
+                    Debug.Log("Convertir en naranja.");
+                }
+            }
+            Destroy(other.gameObject);
+        }
+        //VIOLET
+        if (sphere.gameObject.tag == "blue" && other.gameObject.tag == "red" || sphere.gameObject.tag == "red" && other.gameObject.tag == "blue")
+        {
+            foreach (var x in materials)
+            {
+                if (x.name == "violet")
+                {
+                    sphere.GetComponent<Renderer>().material = x;
+                    sphere.gameObject.tag = "violet";
+                    Debug.Log("Convertir en morado.");
+                }
+            }
+            Destroy(other.gameObject);
         }
     }
 }

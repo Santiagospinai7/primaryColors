@@ -110,6 +110,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sphere: {fileID: 2314610305273495242}
+  materials:
+  - {fileID: 2100000, guid: 81adcb83d54ad4d17bc369bf7220ff9b, type: 2}
+  - {fileID: 2100000, guid: e90b704b366f34187a856ebff7f99e6c, type: 2}
+  - {fileID: 2100000, guid: 11e75d8256c3a48bcad87a71bf12f2fb, type: 2}
+  - {fileID: 2100000, guid: 9c84eefa7624542ebafa9042eaf73fb7, type: 2}
+  - {fileID: 2100000, guid: ed143cb4fa5fd4525bb3453c689ad3b4, type: 2}
+  - {fileID: 2100000, guid: 5651d7fc24cdd4d89b81046c44367f93, type: 2}
 --- !u!54 &2314610305273495216
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -7,6 +7,9 @@ TagManager:
   - yellow
   - red
   - blue
+  - green
+  - orange
+  - violet
   layers:
   - Default
   - TransparentFX
