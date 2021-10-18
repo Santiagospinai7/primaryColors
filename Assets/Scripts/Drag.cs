@@ -6,13 +6,20 @@ public class Drag : MonoBehaviour
 {
     public GameObject sphere;
 
-    private bool isMoving = false;
-
     public Material[] materials;
+
+    private AudioSource joinAudio;
+    private GameObject floor;
 
     private float gameObjectPositionX;
     private float gameObjectPositionY;
     private float gameObjectPositionZ;
+
+    private void Start()
+    {
+        floor = GameObject.Find("Floor");
+        joinAudio = floor.GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -75,13 +82,15 @@ public class Drag : MonoBehaviour
         //GREEN
         if (sphere.gameObject.tag == "blue" && other.gameObject.tag == "yellow" || sphere.gameObject.tag == "yellow" && other.gameObject.tag == "blue")
         {
-            foreach (var x in materials) {  
+            foreach (var x in materials) {
                 if (x.name == "green") {
                     sphere.GetComponent<Renderer>().material = x;
                     sphere.gameObject.tag = "green";
                     Debug.Log("Convertir en verde.");
                 }
             }
+            joinAudio.Play(0);
+            StartCoroutine(tweenCoroutine());
             Destroy(other.gameObject);
         }
         //ORANGE
@@ -96,6 +105,8 @@ public class Drag : MonoBehaviour
                     Debug.Log("Convertir en naranja.");
                 }
             }
+            joinAudio.Play(0);
+            StartCoroutine(tweenCoroutine());
             Destroy(other.gameObject);
         }
         //VIOLET
@@ -110,7 +121,23 @@ public class Drag : MonoBehaviour
                     Debug.Log("Convertir en morado.");
                 }
             }
+            joinAudio.Play(0);
+            StartCoroutine(tweenCoroutine());
             Destroy(other.gameObject);
         }
+    }
+
+    IEnumerator tweenCoroutine()
+    {
+        yield return new WaitForSeconds(0.0001f);
+        LeanTween.scale(sphere, new Vector3(0.85f, 0.85f, 0.85f), 0.1f);
+        yield return new WaitForSeconds(0.1f);
+        LeanTween.scale(sphere, new Vector3(1.2f, 1.2f, 1.2f), 0.1f);
+        yield return new WaitForSeconds(0.1f);
+        LeanTween.scale(sphere, new Vector3(0.9f, 0.9f, 0.9f), 0.1f);
+        yield return new WaitForSeconds(0.1f);
+        LeanTween.scale(sphere, new Vector3(1.1f, 1.1f, 1.1f), 0.1f);
+        yield return new WaitForSeconds(0.1f);
+        LeanTween.scale(sphere, new Vector3(1.0f, 1.0f, 1.0f), 0.1f);
     }
 }
